@@ -46,7 +46,7 @@ export function shuffle(arr) {
 }
 /* 
 *  处理 async/await 异常情况
-*  
+*  @asyncFunc 异步函数
 *  描述：示例：let [err, res] = errorCaptured( asyncFunc );
 */
 export function errorCaptured(asyncFunc) {
@@ -56,4 +56,20 @@ export function errorCaptured(asyncFunc) {
   } catch (e) {
     return [e, null];
   }
+}
+/* 
+*  数组或对象的深拷贝
+*  @obj 目标对象
+*  描述：
+*/
+export function deepCopy(obj) {
+  let retObj = (obj.constructor === Array) ? [] : {};
+  for(let i in obj) {
+    if(typeof obj[i] === 'object') {
+      retObj[i] = deepCopy(obj[i]);
+    } else {
+      retObj[i] = obj[i];
+    }
+  }
+  return retObj;
 }
